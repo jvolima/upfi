@@ -116,7 +116,6 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         status: 'error',
       });
     } finally {
-      // TODO CLEAN FORM, STATES AND CLOSE MODAL
       reset();
       setLocalImageUrl('');
       setImageUrl('');

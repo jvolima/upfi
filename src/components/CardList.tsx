@@ -29,8 +29,8 @@ export function CardList({ cards }: CardsProps): JSX.Element {
       <SimpleGrid spacing="40px" minChildWidth="293px">
         {cards.map(card => (
           <Card
+            key={card.ts}
             data={card}
-            key={card.id}
             viewImage={() => handleViewImage(card.url)}
           />
         ))}

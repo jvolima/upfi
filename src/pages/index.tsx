@@ -3,6 +3,7 @@ import { Button, Box } from '@chakra-ui/react';
 import { useMemo } from 'react';
 import { useInfiniteQuery } from 'react-query';
 
+import Head from 'next/head';
 import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
 import { api } from '../services/api';
@@ -30,27 +31,34 @@ export default function Home(): JSX.Element {
     },
     {
       getNextPageParam: (lastPage, pages) => {
-        if (!pages) {
+        if (!pages[0].after) {
           return null;
         }
 
-        return pages;
+        return pages[0].after;
       },
     }
   );
 
   const formattedData = useMemo(() => {
-    const newData = data?.pages.map(page => {
-      return {
-        title: page.title,
-        description: page.description,
-        url: page.url,
-        ts: page.ts,
-        id: page.id,
-      };
+    const pages = data?.pages.flatMap(page => {
+      return page;
     });
 
-    return newData;
+    const pageData = pages?.map(page => {
+      const images = page.data.map(data => {
+        return {
+          title: data.title,
+          description: data.description,
+          url: data.url,
+          ts: data.ts,
+          id: data.id,
+        };
+      });
+      return images;
+    });
+
+    return pageData;
   }, [data]);
 
   if (isLoading) {
@@ -63,6 +71,9 @@ export default function Home(): JSX.Element {
 
   return (
     <>
+      <Head>
+        <title>Upfi</title>
+      </Head>
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
