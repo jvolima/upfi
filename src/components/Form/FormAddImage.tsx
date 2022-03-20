@@ -99,7 +99,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       const imageInfos = {
         title: data.title as string,
         description: data.description as string,
-        url: data.image[0].name as string,
+        url: imageUrl,
       };
 
       await mutation.mutateAsync(imageInfos);

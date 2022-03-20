@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
       return page;
     });
 
-    const pageData = pages?.map(page => {
+    const pageData = pages?.flatMap(page => {
       const images = page.data.map(data => {
         return {
           title: data.title,
