@@ -31,11 +31,11 @@ export default function Home(): JSX.Element {
     },
     {
       getNextPageParam: (lastPage, pages) => {
-        if (!pages[0].after) {
+        if (!lastPage.after) {
           return null;
         }
 
-        return pages[0].after;
+        return lastPage.after;
       },
     }
   );
